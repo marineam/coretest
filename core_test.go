@@ -10,7 +10,6 @@ import (
 )
 
 const (
-	CaPath                   = "/usr/share/coreos-ca-certificates/"
 	CmdTimeout               = time.Second * 20
 	DbusTimeout              = time.Second * 20
 	DockerTimeout            = time.Second * 60
@@ -142,20 +141,6 @@ func TestSymlinkResolvConf(t *testing.T) {
 	if !IsLink(f) {
 		t.Fatal("/etc/resolv.conf is not a symlink.")
 
-	}
-}
-
-func TestInstalledCACerts(t *testing.T) {
-	t.Parallel()
-	caCerts := []string{
-		"CoreOS_Internet_Authority.pem",
-		"CoreOS_Network_Authority.pem",
-	}
-	for _, fileName := range caCerts {
-		_, err := os.Stat(path.Join(CaPath, fileName))
-		if err != nil {
-			t.Error(err)
-		}
 	}
 }
 
